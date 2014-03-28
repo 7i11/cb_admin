@@ -4,8 +4,8 @@
 <div style="text-align: center; padding: 100px">
     <h1>Really delete {{ record.id }}?</h1>
     <p>This action cannot be undone</p>
-    <form name="delete" method="post">
-        <input type="submit" value="Delete {{ record.id }}" />
+    <form name="delete" method="post" class="form-horizontal">
+        <input type="submit" value="Delete {{ record.id }}" class="btn btn-primary" />
     </form>
 </div>
 {% endblock %}

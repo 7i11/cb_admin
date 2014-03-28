@@ -1,13 +1,7 @@
 {% extends "admin/layouts/admin.html" %}
 {% block title %}International Command Center{% endblock %}
 
-{% block left_submenu %}
-	{% include "lang/shared/_lang_left_submenu.html" with index="true" %}
-{% endblock %}
 
-{% block right_submenu %}
-	{% include "lang/shared/_lang_right_submenu.html" %}
-{% endblock %}
 
 {% block meta_scripts %}
 <script type="text/javascript" src="http://www.google.com/jsapi">
@@ -43,135 +37,160 @@
     }
 </script>
 {% endblock %}
-{% block body %}
-
+{% block content %}
+<div id="main-content">
+    
+<div class="panel panel-default">
 {% if applications %}
-<p>Applications: 
-{% for app in applications %}
-{% ifequal app this_application %}
-<strong>{{ app }}</strong>
-{% else %}
-<a href="{% url action="show" app=app %}">{{ app }}</a>
-{% endifequal %}
-{% endfor %}
-</p>
+    <p>Applications: 
+    {% for app in applications %}
+    {% ifequal app this_application %}
+    <strong>{{ app }}</strong>
+    {% else %}
+    <a href="{% url action="show" app=app %}">{{ app }}</a>
+    {% endifequal %}
+    {% endfor %}
+    </p>
 {% endif %}
+</div>
 
-<h1>International Command Center</h1>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="panel-title"><h1>International Command Center</h1></div>
+    </div>
+    <div class="panel-body">
+        {% if this_lang %}
+        <ul class="toc right">
+            <li class="heading1"><a href="#languages">Manage Languages</a></li>
+            <li class="heading2"><a href="#untranslated">Untranslated messages</a></li>
+           <li class="heading2"><a href="#translated">Translated messages</a></li>
+           <li class="heading2"><a href="#actions">Actions</a></li>
+        </ul>
+    {% endif %}
 
-{% if this_lang %}
-<ul class="toc right">
-	<li class="heading1"><a href="#languages">Manage Languages</a></li>
-	<li class="heading2"><a href="#untranslated">Untranslated messages</a></li>
-	<li class="heading2"><a href="#translated">Translated messages</a></li>
-	<li class="heading2"><a href="#actions">Actions</a></li>
-</ul>
-{% endif %}
+    <h2 id="manage_languages">Manage Languages</h2>
 
-<h2 id="manage_languages">Manage Languages</h2>
 
 {% if this_application %}
 <p>
-<form action="{% url action="create" app=this_application %}">
+<form action="{% url action="create" app=this_application %}" class="form-horizontal">
     <p>
-{% if languages %}
-Your language files:
-{% for lang in languages %}
-{% ifequal lang this_lang %}
-<strong>{{ lang }}</strong>
-{% else %}
-<a href="{% url action="show" app=this_application lang=lang %}">{{ lang }}</a>
-{% endifequal %}
-{% endfor %}
-{% endif %}
-&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="submit" value="+ New language file" />
-&nbsp;&nbsp;&nbsp;&nbsp;
-</p>
+    {% if languages %}
+        Your language files:
+        {% for lang in languages %}
+            {% ifequal lang this_lang %}
+                <strong>{{ lang }}</strong>
+            {% else %}
+                <a href="{% url action="show" app=this_application lang=lang %}">{{ lang }}</a>
+            {% endifequal %}
+        {% endfor %}
+    {% endif %}
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="submit" value="+ New language file" class="btn btn-primary"/>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    </p>
 </form>
 
 {% if this_lang %}
-<hr>
-<h2 id="untranslated">Untranslated messages</h2>
+    <hr>
+    <h2 id="untranslated">Untranslated messages</h2>
 {% endif %}
 
 {% if untranslated_messages %}
-<p><em>{{ untranslated_messages|length }} untranslated messages:</em> (<a href="#" onclick="javascript:startTranslations()">Fill in the blanks with Google!</a> <span style="font-size: 11px; font-family: Courier New; font-weight: bold;">EXPERIMENTAL FEATURE</span>)</p>
-<form method="post"  action="{% url action="edit" app=this_application lang=this_lang %}">
-<table class="list files">
-    <thead>
-        <tr><th>Original/Translation</th></tr>
-    </thead>
-    <tbody>
-        {% for message in untranslated_messages %}
-        <tr class="{% cycle 'odd' 'even' %}">
-        	<td>
-        		<span class="message" id="message{{ forloop.counter0 }}">
-        			<input type="text" style="width: 100%;" value='{{ message }}' readonly="readonly">
-        		</span>
-                <input type="hidden" name="messages[{{ forloop.counter0 }}][orig]" value="{{ message|escape }}" />
-            	<textarea id="trans_message{{ forloop.counter0 }}" style="width: 100%;" name="messages[{{ forloop.counter0 }}][trans]" size="60"></textarea>
-        	</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-<div class="box">
-	<div id="issue_descr_fields">
-	<p>
-		<label for="issue_tracker_id">Submit only translations filled in this form</label>
-		<input type="submit" name="trans_only_filled" value="Submit">
-	</p>
-	</div>
-	<div id="issue_descr_fields">
-	<p>
-		<label for="issue_tracker_id">Submit all translatable string to the po file (you can translate later with a translation tool like Poedit)</label>
-		<input type="submit" name="trans_all_with_blanks" value="Submit">
-	</p>
-	</div>	
-</div>
+    <p><em>{{ untranslated_messages|length }} untranslated messages:</em> (<a href="#" onclick="javascript:startTranslations()">Fill in the blanks with Google!</a> <span style="font-size: 11px; font-family: Courier New; font-weight: bold;">EXPERIMENTAL FEATURE</span>)</p>
+<form method="post"  action="{% url action="edit" app=this_application lang=this_lang %}" class="form-horizontal">
+    <table class="list files">
+        <thead>
+            <tr>
+                <th>Original/Translation</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for message in untranslated_messages %}
+            <tr class="{% cycle 'odd' 'even' %}">
+               <td>
+                    <span class="message" id="message{{ forloop.counter0 }}">
+                        <input type="text" style="width: 100%;" value='{{ message }}' readonly="readonly" class="btn btn-primary">
+                    </span>
+                    <input type="hidden" name="messages[{{ forloop.counter0 }}][orig]" value="{{ message|escape }}" class="btn btn-primary"/>
+                    <textarea id="trans_message{{ forloop.counter0 }}" style="width: 100%;" name="messages[{{ forloop.counter0 }}][trans]" size="60"></textarea>
+               </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="box">
+       <div id="issue_descr_fields">
+       <p>
+            <label for="issue_tracker_id">Submit only translations filled in this form</label>
+            <input type="submit" name="trans_only_filled" value="Submit" class="btn btn-success">
+       </p>
+    </div>
+       <div id="issue_descr_fields">
+           <p>
+                <label for="issue_tracker_id">Submit all translatable string to the po file (you can translate later with a translation tool like Poedit)</label>
+                <input type="submit" name="trans_all_with_blanks" value="Submit" class="btn btn-primary">
+           </p>
+       </div>   
+    </div>
 </form>
 {% else %}
-	{% if this_lang %}
-	<h3>No untranslated string messages found</h3>
-	{% endif %}
+    {% if this_lang %}
+       <h3>No untranslated string messages found</h3>
+    {% endif %}
 {% endif %}
 
 {% if this_lang %}
-<hr>
-<h2 id="translated">Translated messages</h2>
+    <hr>
+    <h2 id="translated">Translated messages</h2>
 {% endif %}
 
 {% if translated_messages %}
-<p><em>{{ translated_messages|length }} translated messages:</em></p>
-<table class="list files">
-    <thead>
-        <tr><th>Original</th><th>Translation</th></tr>
-    </thead>
-    <tbody>
-{% for orig, msg in translated_messages %}
-	<tr class="{% cycle 'odd' 'even' %}">
-		<td>{{ orig }}</td><td><em>{{ msg }}</em></td>
-	</tr>
-{% endfor %}
-</tbody>
-</table>
+    <p><em>{{ translated_messages|length }} translated messages:</em></p>
+    <table class="list files">
+        <thead>
+            <tr><th>Original</th><th>Translation</th></tr>
+        </thead>
+        <tbody>
+        {% for orig, msg in translated_messages %}
+           <tr class="{% cycle 'odd' 'even' %}">
+              <td>{{ orig }}</td><td><em>{{ msg }}</em></td>
+           </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% if last_modified %}
-<p><em>Last modified: {{ last_modified|date:"N j, Y, P" }}</em></p>
+    <p><em>Last modified: {{ last_modified|date:"N j, Y, P" }}</em></p>
 {% endif %}
 {% else %}
-	{% if this_lang %}
-	<h3>No translated string messages found</h3>
-	{% endif %}
+    {% if this_lang %}
+       <h3>No translated string messages found</h3>
+    {% endif %}
 {% endif %}
 
 {% if this_lang %}
-<hr>
-<h2 id="actions">Actions</h2>
-<p><a href="{% url action="delete" app=this_application lang=this_lang %}">Delete this language file...</a></p>
+    <hr>
+    <h2 id="actions">Actions</h2>
+    <p><a href="{% url action="delete" app=this_application lang=this_lang %}">Delete this language file...</a></p>
 {% endif %}
 
 {% endif %}{# this_application #}
 
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+</div>
+
+{% block left_submenu %}
+    {% include "lang/shared/_lang_left_submenu.html" with index="true" %}
+{% endblock %}
 {% endblock %}

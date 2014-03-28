@@ -8,6 +8,8 @@ before_(_) ->
 index('GET', [], Authorization) ->
     {ok, [ {routes_section, true}, {all_routes, boss_web:get_all_routes()} ]}.
 
+
+
 reload('GET', [], Authorization) ->
     boss_web:reload_routes(),
     lists:map(fun(Node) ->

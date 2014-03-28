@@ -1,59 +1,108 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <link rel="shortcut icon" href="{{ _base_url }}/static/favicon.ico" />
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>Chicago Boss Admin - {% block title %}{% endblock %}</title>
-        <link href="{{ _base_url }}/static/stylesheets/application.css?1298394796" media="all" rel="stylesheet" type="text/css" />
-	{% block meta_scripts %}{% endblock %}
+	<meta charset="utf-8">
+	<title>Gamblingq Admin: {% block title %}{% endblock %}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="{{ _base_url }}/static/libs/bootstrap3/css/bootstrap.css"> 
+	<link href="{{ _base_url }}/static/generics/css/admin/archon.css" rel="stylesheet">
+	<link href="{{ _base_url }}/static/generics/css/admin/responsive.css" rel="stylesheet">
+	<link rel="shortcut icon" href="{{ _base_url }}/static/generics/images/favicon.ico">
+
+	
+	<!--
+	<link href="/static/generics/css/admin/prettify.css" rel="stylesheet">
+	<link href="/static/generics/css/admin/custom.css" rel="stylesheet">
+	<script src="js/html5shiv.js"></script>
+	-->
+
+	{% block css %}{% endblock %}
+	<link rel="shortcut icon" href="{{ _base_url }}/static/generics/images/favicon.ico">
+
 </head>
 <body>
-	<div id="wrapper">
-		<div id="wrapper2">
-			<div id="top-menu">
-	    		<div id="account">
-	    			{% block right_submenu %}{% endblock %}
-	    		</div>
-	    		{% block left_submenu %}{% endblock %}
-			</div>
-	      
-			<div id="header">
-			    <div id="quick-search">
-			        Quick Search
-			    </div>
-	    
-	    		<h1>Chicago Boss Admin - {% block title %}{% endblock %}</h1>
-	    
-			    <div id="main-menu">
-			        {% include "admin/layouts/shared/_main_menu.html" %}
-			    </div>
-			</div>
-			<div id="main" class="">
-				<div id="sidebar">
-					{% include "admin/layouts/shared/_sidebar.html" %}
-				</div>		    
-			    <div id="content">
-			    	{% include "admin/layouts/shared/_alerts.html" %}
-			    	<div class="contextual">{% block contextual %}{% endblock %}</div>
-			    	<div class="wiki">
-			        	{% block body %}{% endblock %}
-			        </div>
-					<div style="clear:both;"></div>
-			    </div>
-			</div>
-	
-			<div id="ajax-indicator" style="display:none;">
-				<span>Loading...</span>
-			</div>
-			
-			<div id="footer">
-			  <div class="bgl">
-			  	<div class="bgr">
-			    	Powered by <a href="http://www.chicagoboss.org">Chicago Boss</a>
-			  	</div>
-			  </div>
-			</div>
+	<div class="frame">
+		 <!-- sidebar lateral -->
+
+		<div class="sidebar">
+
+			<div class="wrapper">
+
+				<!-- Replace the src of the image with your logo -->
+				<a href="/admin" class="logo"><img src="{{ _base_url }}/static/generics/images/GQ_admin.png" width="250px" height="160px" alt="GamblingQ Admin" /></a>
+				<ul class="nav nav-list">
+
+					<!-- Sidebar header @add class nav-header for sidebar header -->
+					{% include "admin/layouts/shared/_main_menu.html" %}
+				</ul>
+				
+            </div>
 		</div>
-	</div>
+		<!-- end sidebar lateral -->
+
+			 <!-- menu superior -->
+	    <div class="content">
+            <div class="navbar navbar-inverse navbar-fixed-top ">
+
+
+                <a href="#" onclick="return false;" class="btn pull-left toggle-sidebar">
+                        <span class="fa fa-reorder"></span>
+                </a>
+                         
+				<a class="navbar-brand" href="/admin"><img src="{{ _base_url }}/static/generics/images/GamblingQ.png" width="200px" height="50px" alt="GamblingQ Admin" /> </a>
+
+				{% include "admin/layouts/shared/_sidebar.html" %}
+
+     		</div> <!-- / Navbar-->
+	        <!-- end menu superior -->
+  
+		    	    {% block right_submenu %}{% endblock %}
+					{% block left_submenu %}{% endblock %}
+
+			{% include "admin/layouts/shared/_alerts.html" %}
+			{% block content %}{% endblock %}
+
+ 	    </div> 
+
+		<div class="row footer">
+            <div class="footer">
+	            <div class="col-md-12 text-center">
+	            	Development by Systrix
+     	        </div>
+	        </div>
+ 	    </div> 
+ 	</div>
+
+	<script src="{{ _base_url }}/static/libs/jquery/jquery-1.10.2.min.js"></script>
+	<script src="{{ _base_url }}/static/generics/js/jquery-ui-1.10.3.custom.min.js"></script>
+	<script src="{{ _base_url }}/static/generics/js/jquery.ui.touch-punch.min.js"></script>
+	<script src="{{ _base_url }}/static/libs/bootstrap3/js/bootstrap.min.js"></script>
+
+
+	<!--
+	<script src="/static/generics/js/jquery.placeholder.js"></script>
+	<script src="/static/generics/js/bootstrap-typeahead.js"></script>
+	<script src="/static/generics/js/moment.min.js"></script>
+	<script src="/static/generics/js/jquery.dataTables.min.js"></script>
+	<script src="/static/generics/js/jquery.sortable.js"></script>
+	<script src="/static/generics/js/jquery.gritter.js"></script>	
+	<script type="text/javascript" src="/static/libs/plugins/totop/jquery.ui.totop.min.js"></script> 
+
+	<script src="/static/generics/js/jquery.autosize.min.js"></script>
+	<script src="/static/generics/js/jquery.hotkeys.min.js" ></script>
+	<script src="/static/generics/js/bootstrap-colorpicker.js"></script>
+	<script src="/static/generics/js/bootstrap-markdown.js"></script>
+	-->
+
+	{% block js %}{% endblock %}
+
+	<script src="{{ _base_url }}/static/generics/js/application.js"></script>
+	<script src="{{ _base_url }}/static/generics/js/archon.js"></script>
+
+
+
+
+
 </body>
 </html>

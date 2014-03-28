@@ -1,27 +1,50 @@
 {% extends "admin/layouts/admin.html" %}
 {% block title %}Chicago Boss Hot Code Upgrade{% endblock %}
 
-{% block body %}
-<h1>Chicago Boss Hot Code Upgrade</h1>
-<form method="post" action="{% url action="upgrade" %}" class="tabular">
-<div class="box">
-	<div id="issue_descr_fields">
-	<p>
-		<label for="issue_tracker_id">Upgrade BEAM code</label>
-		<input type="submit" value="Now" />
-	</p>
-	</div>
-</div>
-</form>
+{% block content %}
+<div id="main-content">
+	
 
-<form method="post" action="{% url action="reread_init_scripts" %}" class="tabular">
-<div class="box">
-	<div id="issue_descr_fields">
-	<p>
-		<label for="issue_tracker_id">Reload init scripts</label>
-		<input type="submit" value="Now" />
-	</p>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="panel-title"><h1>Chicago Boss Hot Code Upgrade</h1></div>
+		</div>
+		<div class="panel-body">
+
+			<form method="post" action="{% url action="upgrade" %}" class="form-horizontal">
+				<div class="box">
+					<div id="issue_descr_fields">
+						<div class="row">
+							<div class="col-md-6">
+								<p><label for="issue_tracker_id">Upgrade BEAM code</label></p>
+							</div>
+							<div class="col-md-6">
+								<p align="center"><input type="submit" value="Now" class="btn btn-primary" /></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<ul class="list-group">
+			<li class="list-group-item">
+				<form method="post" action="{% url action="reread_init_scripts" %}" class="form-horizontal">
+					<div class="box">
+						<div id="issue_descr_fields">
+							<div class="row">
+								<div class="col-md-6">
+									<p><label for="issue_tracker_id">Reload init scripts</label></p>
+								</div>
+								<div class="col-md-6">
+									<p align="center"><input type="submit" value="Now" class="btn btn-primary"  /></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</li>
+		</ul>
 	</div>
 </div>
-</form>
 {% endblock %}

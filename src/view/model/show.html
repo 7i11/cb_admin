@@ -19,51 +19,54 @@
     });
 </script>
 {% endblock %}
-{% block body %}
+{% block content %}
+<div class="main-content">
+
 <h1>Displaying {{ record.id }} (<a href="{% url action="edit" record_id=record.id %}">edit</a>)</h1>
-<p><em><a href="{% url action="model" model_name=type %}">Back to the {{ type }} list</a></em></p>
+    <p><em><a href="{% url action="model" model_name=type %}">Back to the {{ type }} list</a></em></p>
     {% for key, val, datatype in attributes %}
-    {% if not datatype == "id" %}
-        <strong>{{ key }}</strong><br />
-        {% if datatype == "datetime" %}
-        <span id="{{ record.id }}-{{ key }}">{{ val|date:"N j, Y, P" }}</span>
-        {% else %}
-        {% if datatype == "string" or datatype == "binary" %}
-        <span id="{{ record.id }}-{{ key }}">{{ val|linebreaksbr }}</span>
-        {% else %}
-        <span id="{{ record.id }}-{{ key }}">{{ val }}</span>
+        {% if not datatype == "id" %}
+            <strong>{{ key }}</strong><br />
+            {% if datatype == "datetime" %}
+                <span id="{{ record.id }}-{{ key }}">{{ val|date:"N j, Y, P" }}</span>
+            {% else %}
+                {% if datatype == "string" or datatype == "binary" %}
+                    <span id="{{ record.id }}-{{ key }}">{{ val|linebreaksbr }}</span>
+                {% else %}
+                <span id="{{ record.id }}-{{ key }}">{{ val }}</span>
+                {% endif %}
+            {% endif %}
+                <br /><br />
         {% endif %}
-        {% endif %}
-        <br /><br />
-    {% endif %}
     {% endfor %}
 
     {% for key, val in record.belongs_to %}
-    {% if val %}
-    <strong>{{ key }}</strong>
-    <table border=1>
+        {% if val %}
+            <strong>{{ key }}</strong>
+    <table border=1 class="table">
         <tr>
         {% for attr in val.attribute_names %}
-        <th>{{ attr }}</th>
+            <th>{{ attr }}</th>
         {% endfor %}
-    </tr>
-    <tr>
+        </tr>
+        <tr>
         {% for attr_name, attr_val in val.attributes %}
-        {% ifequal "id" attr_name %}
-        <td><strong><a href="{% url action="show" record_id=attr_val %}">{{ attr_val }}</a></strong></td>
-        {% else %}
-        {% if "_time" in attr_name %}
-        <td id="{{ val.id }}-{{ attr_name }}">{{ attr_val|date:"N j, Y, P" }}</td>
-        {% else %}
-        <td id="{{ val.id }}-{{ attr_name }}">{{ attr_val|truncatewords:8 }}</td>
-        {% endif %}
-        {% endifequal %}
+            {% ifequal "id" attr_name %}
+                <td><strong><a href="{% url action="show" record_id=attr_val %}">{{ attr_val }}</a></strong></td>
+            {% else %}
+                {% if "_time" in attr_name %}
+                    <td id="{{ val.id }}-{{ attr_name }}">{{ attr_val|date:"N j, Y, P" }}</td>
+                {% else %}
+                    <td id="{{ val.id }}-{{ attr_name }}">{{ attr_val|truncatewords:8 }}</td>
+                {% endif %}
+            {% endifequal %}
         {% endfor %}
-    </tr>
+        </tr>
     </table><br /><br />
-    {% endif %}
+        {% endif %}
     {% endfor %} 
     <form name="delete" action="{% url action="delete" record_id=record.id %}">
         <input type="submit" value="Delete {{ record.id }}?" />
     </form>
 {% endblock %}
+</div>

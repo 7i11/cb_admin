@@ -1,13 +1,8 @@
 {% extends "admin/layouts/admin.html" %}
 {% block title %}Create a language file{% endblock %}
 
-{% block left_submenu %}
-	{% include "lang/shared/_lang_left_submenu.html" with new_language="true" %}
-{% endblock %}
 
-{% block right_submenu %}
-	{% include "lang/shared/_lang_right_submenu.html" %}
-{% endblock %}
+
 
 {% block meta_scripts %}
 <script type="text/javascript" src="http://www.google.com/jsapi">
@@ -48,29 +43,52 @@
     google.setOnLoadCallback(initialize);
 </script>
 {% endblock %}
-{% block body %}
-{% if applications %}
-<p>Applications: 
-{% for app in applications %}
-{% ifequal app this_application %}
-<strong>{{ app }}</strong>
-{% else %}
-<a href="{% url action="show" app=app %}">{{ app }}</a>
-{% endifequal %}
-{% endfor %}
-</p>
-{% endif %}
-<h1>Create a new language</h1>
-<form method="post" class="tabular">
-	<div class="box">
-		<div id="issue_descr_fields">
-		<p>
-			<label for="issue_tracker_id">Select the language<span class="required"> *</span></label>
-			<select id="select_language" name="language" style="width: 120px;"></select>
-		</p>
-		</div>
+{% block content %}
+
+<div id="main-content">
+ 
+<div class="panel panel-default">
+        {% if applications %}
+            <p>Applications: 
+            {% for app in applications %}
+                {% ifequal app this_application %}
+                    <strong>{{ app }}</strong>
+                {% else %}
+                    <a href="{% url action="show" app=app %}">{{ app }}</a>
+                {% endifequal %}
+            {% endfor %}
+            </p>
+        {% endif %}
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="panel-title"><h1>Create a new language</h1></div>
     </div>
-    <input type="submit" value="Create language file" />
-</form>
+    <div class="panel-body">
+        <form method="post" class="form-horizontal">
+            <div class="box">
+                <div id="issue_descr_fields">
+                    <p>
+                        <label for="issue_tracker_id">Select the language:<span class="required"> </span></label>
+                        <select id="select_language" name="language" style="width: 120px;" class="form-control"></select>
+                    </p>
+                </div>
+            </div>
+        <input type="submit" value="Create language file" class="btn btn-primary" />
+        </form>
+    </div>
+</div>  
+
+
+
+</div>
+
+
+{% block left_submenu %}
+    {% include "lang/shared/_lang_left_submenu.html" with new_language="true" %}
+{% endblock %}
+
+
 {% endblock %}
 

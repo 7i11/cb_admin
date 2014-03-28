@@ -15,7 +15,12 @@
 </script>
 {% endblock %}
 
-{% block body %}
+{% block content %}
+
+<div id="main-content">
+
+
+
 <h1>Models data management</h1>
         <p>
         {% for model in models %}
@@ -30,14 +35,23 @@
         {% endfor %}
         </p>
         {% if this_model %}
-        <p>
-        <form name="new" action="{% url action="create" record_type=this_model %}">
-            <input type="submit" value="+ New {{ this_model }}" />
-            &nbsp; &nbsp; See also: <a href="/doc/{{ this_model }}">Documentation for the <code>{{ this_model }}</code> model</a>
-        </form>
-        </p>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title"><b> Model: {{ this_model | upper }}</b> </div>
+            </div>
+            <div class="panel-body">
+                <p>    
+                    <form name="new" action="{% url action="create" record_type=this_model %}">
+
+                    <input type="submit" value="+ New {{ this_model }}" class="btn btn-primary" />
+                    &nbsp; &nbsp; See also: <a href="/doc/{{ this_model }}">Documentation for the <code>{{ this_model }}</code> model</a>
+                </form>
+                </p>
+
+            
+       
         {% endif %}
-        <table border=1>
+        <table border=1 class="table">
             {% if attribute_names %}
             <tr>
                 {% for attr in attribute_names %}
@@ -87,4 +101,9 @@
         <p><a href="{% url action="csv" model_name=this_model %}">Export as CSV</a> - 
         <a href="{% url action="upload" model_name=this_model %}">Bulk upload</a></p>
         {% endif %}
+        </div>
+    </div>
+
 {% endblock %}
+
+</div>

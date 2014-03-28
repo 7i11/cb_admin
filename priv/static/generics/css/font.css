@@ -1,0 +1,19 @@
+@font-face {
+  font-family: 'Coustard';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Coustard'), url(/static/generics/fonts/Coustard.woff) format('woff');
+}
+@font-face {
+  font-family: 'Rochester';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Coustard'), url(/static/generics/fonts/Rochester.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'PT Sans Narrow';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Coustard'), url(/static/generics/fonts/PT-Sans-Narrow.woff) format('woff');
+}

@@ -2,3 +2,4 @@
 %% Format: [{controller, "Controller"}, {action, "Action"}]
 
 {"/", [{controller, "admin"}, {action, "index"}]}.
+

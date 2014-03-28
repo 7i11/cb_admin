@@ -1,13 +1,6 @@
 {% extends "admin/layouts/admin.html" %}
 {% block title %}International Command Center: Big Red Button{% endblock %}
 
-{% block left_submenu %}
-	{% include "lang/shared/_lang_left_submenu.html" with automatic_translator="true" %}
-{% endblock %}
-
-{% block right_submenu %}
-	{% include "lang/shared/_lang_right_submenu.html" %}
-{% endblock %}
 
 {% block meta_scripts %}
 <script type="text/javascript" src="http://www.google.com/jsapi">
@@ -37,7 +30,10 @@ google.setOnLoadCallback(initialize);
 </script>
 {% endblock %}
 
-{% block body %}
+{% block content %}
+<div id="main-content">
+    
+
 {% if applications %}
 <p>Applications: 
 {% for app in applications %}
@@ -55,8 +51,11 @@ google.setOnLoadCallback(initialize);
 </div>
 
 <p><em>Language files that will be created or updated:</em></p>
-<table id="new_language_table" border="1">
-    <tr><th>Language</th><th>Status</th></tr>
+<table class="table" id="new_language_table" border="1">
+    <tr>
+        <th>Language</th>
+        <th>Status</th>
+    </tr>
 </table>
 
 <p><em>Language files that will be unaffected:</em>
@@ -66,5 +65,10 @@ google.setOnLoadCallback(initialize);
 {% endif %}
 {% endfor %}
 </p>
+</div>
+
+{% block left_submenu %}
+    {% include "lang/shared/_lang_left_submenu.html" with automatic_translator="true" %}
+{% endblock %}
 
 {% endblock %}

@@ -1,0 +1,88 @@
+
+/* Login page
+--------------------------*/
+@import "font.css";
+
+.box-holder > h1 {
+  text-align: center;
+  font-size:60px;
+  	color: #fff;
+  font-family: 'Coustard', sans-serif;
+  text-shadow: 1px 1px 1px #000;
+}
+
+.box-holder > h3, .box-holder >h4 {
+  text-align: center;
+  font-size: 25px;
+  	color: #fff;
+  font-family: 'Coustard', sans-serif;
+  text-shadow: 1px 1px 1px #000;
+}
+
+
+
+.box-holder{
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	-ms-border-radius: 15px;
+	-o-border-radius: 15px;
+	border-radius: 15px;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	display: block;
+	margin-left: -205px;
+	width: 420px;
+	height: auto;
+	background: white;
+	text-align: center;
+	padding:30px;
+	color: #000;
+	background-color:#2E2E2E;
+	 -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+}
+
+input {
+	background-color:#FFFFFF;
+}
+
+btn-default{
+	background-color:#222 !important;
+}
+
+.input-group {
+	padding:0px 10px;
+}
+
+.btn-info{
+
+    background-color: #A4A4A4;
+    border-color: #A4A4A4;
+    color: #2E64FE;
+}
+
+.btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .open .dropdown-toggle.btn-info {
+
+    background-color: #A4A4A4;
+    border-color: #A4A4A4;
+    color: #2E64FE;
+     -webkit-box-shadow: 0 2px 9px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 9px rgba(0, 0, 0, 0.5);
+}
+
+.btn-comment{
+
+    background-color: rgb(11, 47, 58);
+    border-color: rgb(11, 47, 58);
+    color: #fff;
+}
+
+.btn-comment:hover, .btn-comment:focus, .btn-comment:active, .btn-comment.active, .open .dropdown-toggle.btn-comment {
+
+    background-color: rgb(11, 47, 58);
+    border-color: rgb(11, 47, 58);
+    color: #fff;
+    -webkit-box-shadow: 0 2px 9px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 9px rgba(0, 0, 0, 0.5);
+}

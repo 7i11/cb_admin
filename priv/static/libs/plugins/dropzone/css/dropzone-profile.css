@@ -1,0 +1,49 @@
+@import "dropzone.css";
+
+/* The MIT License */
+
+.dropzone p, .dropzone b{
+  visibility: hidden;
+}
+.dropzone:hover p{
+  visibility: visible;
+  font-size: 13px;
+  color: #8A0808;
+  font-weight: 800;
+  margin-top: 25px;
+}
+.dropzone:hover  b{
+  visibility: visible;
+  font-size: 12px;
+  color: #000;
+}
+.dropzone:hover {
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+
+}
+.dropzone {
+  border: 1px solid rgba(0,0,0,0.03);
+  min-height: 150px;
+  -webkit-border-radius: 3px;
+  border-radius: 0px;
+  background: rgba(0,0,0,0.03);
+  padding: 20px;
+}
+.dropzone .dz-default.dz-message {
+   display: none; 
+}
+@media all and (-webkit-min-device-pixel-ratio:1.5),(min--moz-device-pixel-ratio:1.5),(-o-min-device-pixel-ratio:1.5/1),(min-device-pixel-ratio:1.5),(min-resolution:138dpi),(min-resolution:1.5dppx) {
+  .dropzone .dz-default.dz-message {
+   display: none;
+  }
+}
+.dropzone .dz-default.dz-message span{
+  display: none;
+}
+.dropzone.dz-started .dz-message {
+   display: none;
+}
+.dropzone .dz-preview,
+.dropzone-previews .dz-preview {
+  margin-top: -50px;
+}

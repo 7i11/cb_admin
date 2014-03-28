@@ -1,7 +1,26 @@
 {% if this_application %}
+
+<div id="main-content">
+	
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<div class="panel-title">Lang Menu</div>
+	</div>
+	<div class="panel-body">
+		{% if index %} {% endif %}<a href="{% url controller="lang" action="show" app=this_application %}">Language list</a>
+	</div>
+	<ul class="list-group">
+    <li class="list-group-item">{% if automatic_translator %}* {% endif %}<a href="{% url controller="lang" action="big_red_button" app=this_application %}">Automatic Translator</a></li>
+    <li class="list-group-item">{% if new_language %}* {% endif %}<a href="{% url controller="lang" action="create" app=this_application %}">New language file</a></li>
+    <li li class="list-group-item"><a href="http://chicagoboss.org/projects/chicagoboss/wiki/I18n_Quickstart">I18n Quickstart</a></li>
+</ul>
+</div>
+</div>
+<!--
 <ul>
     <li>{% if index %}* {% endif %}<a href="{% url controller="lang" action="show" app=this_application %}">Language list</a></li>
     <li>{% if automatic_translator %}* {% endif %}<a href="{% url controller="lang" action="big_red_button" app=this_application %}">Automatic Translator</a></li>
     <li>{% if new_language %}* {% endif %}<a href="{% url controller="lang" action="create" app=this_application %}">New language file</a></li>
-</ul>
+</ul> -->
 {% endif %}
